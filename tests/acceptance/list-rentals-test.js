@@ -14,7 +14,7 @@ moduleForAcceptance('Acceptance | list rentals');
 test('should redirect to rentals route.', function(assert){
   visit('/');
   andThen(function(){
-    assert.equal(currentURL(), '/rentals', 'should redirect automatically')
+    assert.equal(currentURL(), '/rentals', 'should redirect automatically');
   });
 });
 
@@ -22,14 +22,14 @@ test('should list available rentals.', function(assert){
   visit('/');
   andThen(function(){
     assert.equal(find('.listing').length, 3, 'should see 3 listings');
-  })
+  });
 });
 
 test('should link to information about the company.', function(){
   visit('/');
   click('a:contains("About")');
   andThen(function(){
-    assert.equal(currentURL(), '/about', 'should navigate to about'
+    assert.equal(currentURL(), '/about', 'should navigate to about');
   });
 });
 
@@ -37,7 +37,7 @@ test('should link to contact information.', function(assert){
   visit('/');
   click('a:contains("Contact")');
   andThen(function(){
-    assert.equal(currentURL(), '/contact', 'should navigate to contact'
+    assert.equal(currentURL(), '/contact', 'should navigate to contact');
   });
 });
 
@@ -55,7 +55,7 @@ test('should show details for a specific rental.', function(assert){
   visit('/rentals');
   click('a:contains("Grand Old Mansion")');
   andThen(function(){
-    assert.equal(currentURL(), '/rentals/grand-old-mansion', 'should navigate to show route')
+    assert.equal(currentURL(), '/rentals/grand-old-mansion', 'should navigate to show route');
     assert.equal('.show-listing h2').text(), "Grand Old Mansion", 'should list rental title');
     assert.equal('.description').length, 1, 'should list a description of the property');
   });
