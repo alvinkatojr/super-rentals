@@ -3,10 +3,10 @@ import moduleForAcceptance from 'super-rentals/tests/helpers/module-for-acceptan
 
 moduleForAcceptance('Acceptance | list rentals');
 
-test('visiting /', function(assert) {
-  visit('/');
-
-  andThen(function() {
-    assert.equal(currentURL(), '/');
-  });
-});
+// test('visiting /', function(assert) {
+//   visit('/');
+//
+//   andThen(function() {
+//     assert.equal(currentURL(), '/');
+//   });
+// });
