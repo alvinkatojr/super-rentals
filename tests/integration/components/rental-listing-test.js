@@ -5,7 +5,16 @@ moduleForComponent('rental-listing', 'Integration | Component | rental listing',
   integration: true
 });
 
-test('it renders', function(assert) {
+test('should toggle wide class on click', function(assert) {
+  assert.expect(3);
+  let stubRental = Ember.Object.create({
+    image: 'fake.png',
+    title: 'test-title',
+    owner: 'test-owner',
+    type: 'test-type',
+    city: 'test-city',
+    bedrooms: 3
+  });
 
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
