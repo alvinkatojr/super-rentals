@@ -18,17 +18,18 @@ test('should toggle wide class on click', function(assert) {
 
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
-
-  this.render(hbs`{{rental-listing}}`);
-
-  assert.equal(this.$().text().trim(), '');
+  this.set('rentalObj', stubRental);
+  this.render(hbs`{{rental-listing rental=rentalObj}}`);
+  assert.equal(this.$('.image.wide').length, 0, 'initially rendered small');
+  this.$('.image').click();
+  assert.equal(this.$('.image.wide').length, 1, 'rendered wide after click');
+  this.$('.image').click();
+  assert.equal(this.$('.image.wide').length, 0, 'rendered small after second click');
 
   // Template block usage:
-  this.render(hbs`
-    {{#rental-listing}}
-      template block text
-    {{/rental-listing}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  // this.render(hbs`
+  //   {{#rental-listing}}
+  //     template block text
+  //   {{/rental-listing}}
+  // `);
 });
