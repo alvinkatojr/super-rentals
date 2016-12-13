@@ -36,3 +36,13 @@ test('should initially load all listings', function(assert) {
     assert.equal(this.$('.city').first().text().trim(), 'San Francisco');
   });
 });
+
+test('should update with matching listings', function(assert){
+  this.on('filterByCity', (val) => {
+    if (val === ''){
+      return RSVP.resolve(ITEMS);
+    } else {
+      return RSVP.resolve(FILTERED_ITEMS);
+    }
+  });
+});
