@@ -31,14 +31,8 @@ test('should initially load all listings', function(assert) {
     {{/list-filter}}
   `);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#list-filter}}
-      template block text
-    {{/list-filter}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  return wait().then(() => {
+    assert.equal(this.$('.city').length, 3);
+    assert.equal(this.$('.city').first().text().trim(), 'San Francisco');
+  });
 });
