@@ -10,11 +10,15 @@ moduleForComponent('list-filter', 'Integration | Component | list filter', {
 const ITEMS = [{city: 'San Francisco'}, {city: 'Portland'}, {city: 'Seattle'}];
 const FILTERED = [{city: 'San Francisco'}];
 
-test('it renders', function(assert) {
-
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-
+test('should initially load all listings', function(assert) {
+  this.on('filterByCity', (val) => {
+    if (val === ''){
+      return RSVP.resolve(ITEMS);
+    } else {
+      return RSVP.resolve(FILTERED_ITEMS);
+    }
+  });
+  
   this.render(hbs`{{list-filter}}`);
 
   assert.equal(this.$().text().trim(), '');
