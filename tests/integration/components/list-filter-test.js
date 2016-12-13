@@ -57,4 +57,11 @@ test('should update with matching listings', function(assert){
       </ul>
     {{/list-filter}}
   `);
+
+  this.$('.list-filter input').val('San').keyup();
+
+  return wait().then(() => {
+    assert.equal(this.$('.city').length, 1);
+    assert.equal(this.$('.city').text().trim(), 'San Francisco');
+  });
 });
