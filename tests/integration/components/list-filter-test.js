@@ -7,6 +7,9 @@ moduleForComponent('list-filter', 'Integration | Component | list filter', {
   integration: true
 });
 
+const ITEMS = [{city: 'San Francisco'}, {city: 'Portland'}, {city: 'Seattle'}];
+const FILTERED = [{city: 'San Francisco'}];
+
 test('it renders', function(assert) {
 
   // Set any properties with this.set('myProperty', 'value');
