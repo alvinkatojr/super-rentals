@@ -18,8 +18,18 @@ test('should initially load all listings', function(assert) {
       return RSVP.resolve(FILTERED_ITEMS);
     }
   });
-  
-  this.render(hbs`{{list-filter}}`);
+
+  this.render(hbs`
+    {{#list-filter filter=(action 'filterByCity') as |results|}}
+      <ul>
+        {{#each results as |item|}}
+          <li class="city">
+            {{item.city}}
+          </li>
+        {{/each}}
+      </ul>
+    {{/list-filter}}
+  `);
 
   assert.equal(this.$().text().trim(), '');
 
