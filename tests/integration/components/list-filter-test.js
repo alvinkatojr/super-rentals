@@ -1,5 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import wait from 'ember-test-helpers/wait';
+import RSVP from 'rsvp';
 
 moduleForComponent('list-filter', 'Integration | Component | list filter', {
   integration: true
