@@ -12,7 +12,11 @@ let StubMapsService = Ember.Service.extend({
 });
 
 moduleForComponent('location-map', 'Integration | Component | location map', {
-  integration: true
+  integration: true,
+  beforeEach(){
+    this.register('service:maps', StubMapsService);
+    this.inject.service('maps', { as: 'mapsService'});
+  }
 });
 
 test('it renders', function(assert) {
