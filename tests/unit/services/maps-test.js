@@ -24,3 +24,13 @@ test('should create a new map if one isnt cached for location', function(assert)
   assert.ok(element, 'element exists');
   assert.equal(element.className, 'map', 'element has class name of map')
 });
+
+test('should use existing map if one is cached for location', function(assert){
+  assert.expect(1);
+  let stubCachedMaps = Ember.Object.create({
+    sanFrancisco: DUMMY_ELEMENT
+  });
+  let mapService = this.subject({ cachedMaps: stubCachedMaps });
+  let element = mapService.getMapElement('San Francisco');
+  assert.equal(element, DUMMY_ELEMENT, 'element fetched from cache');
+});
