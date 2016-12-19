@@ -16,8 +16,11 @@ moduleFor('service:maps', 'Unit | Service | maps', {
   needs: ['util:google-maps']
 });
 
-// Replace this with your real tests.
-test('it exists', function(assert) {
-  let service = this.subject();
-  assert.ok(service);
+test('should create a new map if one isnt cached for location', function(assert) {
+  assert.expect(4);
+  let stubMapUtil = MapUtilStub.create({ assert });
+  let mapService = this.subject({ mapUtil: stubMapUtil });
+  let element = mapService.getMapElement('San Francisco');
+  assert.ok(element, 'element exists');
+  assert.equal(element.className, 'map', 'element has class name of map')
 });
