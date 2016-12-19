@@ -9,7 +9,7 @@ let MapUtilStub = Ember.Object.extend({
     this.assert.ok(location, 'createMap called with location');
     return DUMMY_ELEMENT;
   }
-})
+});
 
 moduleFor('service:maps', 'Unit | Service | maps', {
   // Specify the other units that are required for this test.
@@ -22,7 +22,7 @@ test('should create a new map if one isnt cached for location', function(assert)
   let mapService = this.subject({ mapUtil: stubMapUtil });
   let element = mapService.getMapElement('San Francisco');
   assert.ok(element, 'element exists');
-  assert.equal(element.className, 'map', 'element has class name of map')
+  assert.equal(element.className, 'map', 'element has class name of map');
 });
 
 test('should use existing map if one is cached for location', function(assert){
