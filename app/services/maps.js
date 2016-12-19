@@ -22,4 +22,10 @@ export default Ember.Service.extend({
     }
     return element;
   },
+
+  createMapElement(){
+    let element = document.createElement('div');
+    element.className = 'map';
+    return element;
+  }
 });
