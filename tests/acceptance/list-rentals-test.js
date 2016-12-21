@@ -8,14 +8,11 @@ let StubMapsService = Ember.Service.extend({
 });
 
 moduleForAcceptance('Acceptance | list rentals');
-
-// test('visiting /', function(assert) {
-//   visit('/');
-//
-//   andThen(function() {
-//     assert.equal(currentURL(), '/');
-//   });
-// });
+  beforeEach(){
+    this.application.register('service:stubMaps', StubMapsService);
+    this.application.inject('component:location-map', 'maps', 'service:stubMaps');
+  }
+});
 
 test('should redirect to rentals route.', function(assert){
   visit('/');
