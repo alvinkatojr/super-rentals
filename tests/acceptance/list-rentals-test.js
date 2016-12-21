@@ -1,6 +1,12 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'super-rentals/tests/helpers/module-for-acceptance';
 
+let StubMapsService = Ember.Service.extend({
+  getMapElement(){
+    return document.createElement('div');
+  }
+});
+
 moduleForAcceptance('Acceptance | list rentals');
 
 // test('visiting /', function(assert) {
