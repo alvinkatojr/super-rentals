@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { helper } from '@ember/component/helper';
 
 const communityPropetyTypes = [
 	'Condo',
@@ -9,9 +9,9 @@ const communityPropetyTypes = [
 export function rentalPropetyType([type]/*, hash*/) {
 	if (communityPropetyTypes.includes(type)){
 		return 'Community';
-  	}
+  }
 
 	return 'Standalone';
 }
 
-export default Ember.Helper.helper(rentalPropetyType);
+export default helper(rentalPropetyType);

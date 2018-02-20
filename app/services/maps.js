@@ -1,11 +1,12 @@
-import Ember from 'ember';
+import EmberObject from '@ember/object';
+import Service from '@ember/service';
 import MapUtil from '../utils/google-maps';
 
-export default Ember.Service.extend({
+export default Service.extend({
 
   init(){
     if (!this.get('cachedMaps')){
-      this.set('cachedMaps', Ember.Object.create());
+      this.set('cachedMaps', EmberObject.create());
     }
     if (!this.get('mapUtil')){
       this.set('mapUtil', MapUtil.create());
