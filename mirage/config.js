@@ -9,7 +9,7 @@ export default function() {
   */
 
   // this.urlPrefix = '';    // make this `http://localhost:8080`, for example, if your API is on a different server
-  // this.namespace = '';    // make this `api`, for example, if your API is namespaced
+  // this.namespace = '';    // make this `/api`, for example, if your API is namespaced
   // this.timing = 400;      // delay for each request, automatically set to 0 during testing
 
   /*
@@ -21,11 +21,10 @@ export default function() {
     this.put('/posts/:id'); // or this.patch
     this.del('/posts/:id');
 
-    http://www.ember-cli-mirage.com/docs/v0.2.x/shorthands/
+    http://www.ember-cli-mirage.com/docs/v0.3.x/shorthands/
   */
-
   this.namespace = '/api';
-
+  
   let rentals = [{
     type: 'rentals',
     id: 'grand-old-mansion',
@@ -64,9 +63,9 @@ export default function() {
     }
   }];
 
-  this.get('/rentals', function(db, request){
-    if (request.queryParams.city !== undefined){
-      let filteredRentals = rentals.filter(function(i){
+  this.get('/rentals', function (db, request) {
+    if (request.queryParams.city !== undefined) {
+      let filteredRentals = rentals.filter(function (i) {
         return i.attributes.city.toLowerCase().indexOf(request.queryParams.city.toLowerCase()) !== -1;
       });
       return { data: filteredRentals };
@@ -76,7 +75,7 @@ export default function() {
   });
 
   // Find and return the provided rental from our rental list
-  this.get('/rentals/:id', function(db, request){
+  this.get('/rentals/:id', function (db, request) {
     return { data: rentals.find((rental) => request.params.id === rental.id) };
   });
 }
