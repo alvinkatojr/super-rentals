@@ -4,6 +4,7 @@ export default DS.Model.extend({
   title: DS.attr(),
   owner: DS.attr(),
   city: DS.attr(),
+  category: DS.attr(),
   type: DS.attr(),
   image: DS.attr(),
   bedrooms: DS.attr(),
