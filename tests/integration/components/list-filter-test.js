@@ -1,67 +1,56 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import wait from 'ember-test-helpers/wait';
 import RSVP from 'rsvp';
 
-moduleForComponent('list-filter', 'Integration | Component | list filter', {
-  integration: true
-});
+const ITEMS = [{ city: 'San Francisco' }, { city: 'Portland' }, { city: 'Seattle' }];
+const FILTERED_ITEMS = [{ city: 'San Francisco' }];
 
-const ITEMS = [{city: 'San Francisco'}, {city: 'Portland'}, {city: 'Seattle'}];
-const FILTERED = [{city: 'San Francisco'}];
+module('Integration | Component | list-filter', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('should initially load all listings', function(assert) {
-  this.on('filterByCity', (val) => {
-    if (val === ''){
-      return RSVP.resolve(ITEMS);
-    } else {
-      return RSVP.resolve(FILTERED_ITEMS);
-    }
-  });
+  test('it should initially load all listings', function(assert){
+    // We want our actions to return promises,
+    // since they are potentially fetching data asynchronously
+    this.on('filterByCity', () => {
+      return RSVP.resolve({ results: ITEMS });
+    });
 
-  this.render(hbs`
-    {{#list-filter filter=(action 'filterByCity') as |results|}}
-      <ul>
+    this.render(hbs`
+      {{#list-filter filter=(action 'filterByCity') as |results|}}
+        <ul>
         {{#each results as |item|}}
           <li class="city">
             {{item.city}}
           </li>
         {{/each}}
-      </ul>
-    {{/list-filter}}
-  `);
+        </ul>
+      {{/list-filter}}
+    `);
 
-  return wait().then(() => {
-    assert.equal(this.$('.city').length, 3);
-    assert.equal(this.$('.city').first().text().trim(), 'San Francisco');
-  });
-});
-
-test('should update with matching listings', function(assert){
-  this.on('filterByCity', (val) => {
-    if (val === ''){
-      return RSVP.resolve(ITEMS);
-    } else {
-      return RSVP.resolve(FILTERED_ITEMS);
-    }
+    return wait().then(() => {
+      assert.equal(this.$('.city').length, 3);
+      assert.equal(this.$('.city').first().text().trim(), 'San Francisco');
+    });
   });
 
-  this.render(hbs`
-    {{#list-filter filter=(action 'filterByCity') as |results|}}
-      <ul>
-      {{#each results as |item|}}
-        <li class="city">
-          {{item.city}}
-        </li>
-      {{/each}}
-      </ul>
-    {{/list-filter}}
-  `);
+  test('it renders', async function(assert) {
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.set('myAction', function(val) { ... });
 
-  this.$('.list-filter input').val('San').keyup();
+    await render(hbs`{{list-filter}}`);
 
-  return wait().then(() => {
-    assert.equal(this.$('.city').length, 1);
-    assert.equal(this.$('.city').text().trim(), 'San Francisco');
+    assert.equal(this.element.textContent.trim(), '');
+
+    // Template block usage:
+    await render(hbs`
+      {{#list-filter}}
+        template block text
+      {{/list-filter}}
+    `);
+
+    assert.equal(this.element.textContent.trim(), 'template block text');
   });
 });
