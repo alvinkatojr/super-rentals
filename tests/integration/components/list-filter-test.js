@@ -11,14 +11,14 @@ const FILTERED_ITEMS = [{ city: 'San Francisco' }];
 module('Integration | Component | list-filter', function(hooks) {
   setupRenderingTest(hooks);
 
-  test('it should initially load all listings', function(assert){
+  test('it should initially load all listings', async function(assert){
     // We want our actions to return promises,
     // since they are potentially fetching data asynchronously
-    this.on('filterByCity', () => {
+    this.set('filterByCity', () => {
       return RSVP.resolve({ results: ITEMS });
     });
 
-    this.render(hbs`
+    await render(hbs`
       {{#list-filter filter=(action 'filterByCity') as |results|}}
         <ul>
         {{#each results as |item|}}
@@ -36,8 +36,8 @@ module('Integration | Component | list-filter', function(hooks) {
     });
   });
 
-  test('should update with matching listings', function(assert){
-    this.on('filterByCity', (val) => {
+  test('should update with matching listings', async function(assert){
+    this.set('filterByCity', (val) => {
       if (val === ''){
         return RSVP.resolve({
           query: val,
@@ -51,8 +51,8 @@ module('Integration | Component | list-filter', function(hooks) {
       }
     });
 
-    this.render(hbs`
-      {{#list-filter filter=(action 'filterByCity) as |results|}}
+    await render(hbs`
+      {{#list-filter filter=(action 'filterByCity') as |results|}}
         <ul>
         {{#each results as |item|}}
           <li class="city">
@@ -65,7 +65,7 @@ module('Integration | Component | list-filter', function(hooks) {
 
     // The keyup event here should invoke an action that will cause the list to be filtered
     this.$('.list-filter input').value('San').keyup();
-    
+
     return wait().then(() => {
       assert.equal(this.$('city').length, 1);
       assert.equal(this.$('.city').text().trim(), 'San Francisco');
