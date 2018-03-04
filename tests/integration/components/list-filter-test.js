@@ -32,7 +32,7 @@ module('Integration | Component | list-filter', function(hooks) {
 
     return wait().then(() => {
       assert.equal(this.$('.city').length, 3);
-      assert.equal(this.$('.city').first().text().trim(), 'San Francisco');
+      assert.equal(this.$('.city').first().textContent().trim(), 'San Francisco');
     });
   });
 
@@ -68,7 +68,7 @@ module('Integration | Component | list-filter', function(hooks) {
 
     return wait().then(() => {
       assert.equal(this.$('city').length, 1);
-      assert.equal(this.$('.city').text().trim(), 'San Francisco');
+      assert.equal(this.$('.city').textContent().trim(), 'San Francisco');
     });
   });
 
