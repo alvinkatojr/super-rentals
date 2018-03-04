@@ -72,21 +72,13 @@ module('Integration | Component | list-filter', function(hooks) {
     });
   });
 
-  test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
-
-    await render(hbs`{{list-filter}}`);
-
-    assert.equal(this.element.textContent.trim(), '');
-
-    // Template block usage:
-    await render(hbs`
-      {{#list-filter}}
-        template block text
-      {{/list-filter}}
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
+  test('should filter the list of rentals by city.', function(assert){
+    visit('/');
+    fillIn('.list-filter input', 'Seattle');
+    keyEvent('.list-filter input', 'keyup', 69);
+    andThen(function(){
+      assert.equal(find('.listing').length, 1, 'should show 1 listing');
+      assert.equal(find('.listing .location:contains("Seattle")').length, 1, 'should contain 1 listing with location Seattle');
+    });
   });
 });
